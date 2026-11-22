@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Bazaar</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #fbeedc 0%, #f8e6b5 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            color: #3b2d13;
+        }
+        .nav {
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            padding: 18px 32px;
+            box-shadow: 0 2px 12px #f8e6b5cc;
+            font-size: 1.08rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #6a4a1b;
+            margin-right: 32px;
+            font-weight: 600;
+            transition: color 0.18s;
+            display: flex;
+            align-items: center;
+        }
+        .nav a:last-child { margin-right: 0; }
+        .nav a:hover { color: #e2b04a; }
+
+        .checkout-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 48px;
+            margin-bottom: 60px;
+        }
+        .checkout-card {
+            background: #fffefb;
+            border-radius: 22px;
+            box-shadow: 0 8px 32px #cdb89244;
+            padding: 44px 48px 36px 48px;
+            max-width: 440px;
+            width: 100%;
+            margin: 0 auto;
+            border: 1.5px solid #f2e2be;
+            animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) 0.1s;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .checkout-section h2 {
+            font-size: 2.3rem;
+            margin-bottom: 26px;
+            font-weight: 800;
+            color: #c19a6b;
+            letter-spacing: 0.5px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .checkout-section h2 i {
+            color: #e2b04a;
+            font-size: 1.3em;
+        }
+        .checkout-form label {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 20px;
+            font-weight: 600;
+            color: #7c6845;
+            font-size: 1.03rem;
+            letter-spacing: 0.1px;
+        }
+        .checkout-form input,
+        .checkout-form select {
+            margin-top: 8px;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1.5px solid #e2cfa2;
+            background: #fff8e6;
+            font-size: 1.05rem;
+            font-family: inherit;
+            box-shadow: 0 2px 8px #fbeedc33;
+            transition: border 0.18s, box-shadow 0.18s;
+        }
+        .checkout-form input:focus,
+        .checkout-form select:focus {
+            border: 1.5px solid #c19a6b;
+            outline: none;
+            background: #fffbe7;
+            box-shadow: 0 4px 16px #fbeedc77;
+        }
+        .checkout-form select {
+            cursor: pointer;
+        }
+        .checkout-btn {
+            background: linear-gradient(90deg, #f2c66d 60%, #e2b04a 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 0;
+            width: 100%;
+            font-size: 1.13rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0 2px 12px #e9c97a33;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.14s;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            letter-spacing: 0.04em;
+        }
+        .checkout-btn:hover, .checkout-btn:focus {
+            background: linear-gradient(90deg, #e2b04a 60%, #f2c66d 100%);
+            box-shadow: 0 4px 24px #e9c97a55;
+            transform: translateY(-2px) scale(1.01);
+        }
+        .checkout-form input[type="text"],
+        .checkout-form input[type="email"] {
+            background: #fff;
+        }
+        .checkout-form input:disabled {
+            opacity: 0.7;
+        }
+        .footer-content {
+            background: #fff9ed;
+            border-top: 1.5px solid #e2cfa2;
+            text-align: center;
+            padding: 22px 0 16px 0;
+            font-size: 1.01rem;
+            color: #b49a6c;
+            letter-spacing: 0.05em;
+            box-shadow: 0 -2px 12px #fbeedc33;
+        }
+        /* Modal */
+        #loginModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.32);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        #loginModal > div {
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+            padding: 36px 36px 24px 36px;
+            max-width: 400px;
+            width: 90vw;
+            margin: auto;
+            position: relative;
+            animation: fadeInUp 0.5s cubic-bezier(.23,1.01,.32,1);
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #e2b04a;
+            color: #fff;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: background 0.2s;
+        }
+        .login-btn:hover { background: #c19a6b; }
+        .login-links a { color: #e2b04a !important; }
+        .login-links a:hover { text-decoration: underline; }
+        @media (max-width: 600px) {
+            .checkout-card {
+                padding: 18px 6vw 16px 6vw;
+                max-width: 98vw;
+            }
+            .checkout-section {
+                margin-top: 18px;
+            }
+            .checkout-section h2 {
+                font-size: 1.3rem;
+            }
+            .nav {
+                padding: 12px 8px;
+                font-size: 0.98rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.php"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="cart.php"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="profile.php"><i class="fa-solid fa-user"></i> Profile</a>
+        <a href="confirm-logout.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </nav>
+    </div>
+    <main>
+        <section class="checkout-section">
+          
+            <div class="checkout-card">
+                <h2><i class="fa-solid fa-bag-shopping"></i> Checkout</h2>
+                <form class="checkout-form" id="checkoutForm">
+                    <label><i class="fa-solid fa-user"></i> Full Name
+                        <input type="text" required placeholder="Your full name">
+                    </label>
+                    <label><i class="fa-solid fa-envelope"></i> Email
+                        <input type="email" required placeholder="you@email.com">
+                    </label>
+                    <label><i class="fa-solid fa-location-dot"></i> Shipping Address
+                        <input type="text" required placeholder="Street, City, Country">
+                    </label>
+                    <label><i class="fa-solid fa-credit-card"></i> Payment Method
+                        <select required>
+                            <option>Credit Card</option>
+                            <option>PayPal</option>
+                            <option>Cash on Delivery</option>
+                        </select>
+                    </label>
+                    <button type="submit" class="checkout-btn"><i class="fa-solid fa-check"></i> Place Order</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <span>&copy; 2025 Bazaar E-commerce. All rights reserved.</span>
+        </div>
+    </footer>
+    <!-- Login Modal (hidden by default)
+    <div id="loginModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.32); z-index:9999; align-items:center; justify-content:center;">
+        <div style="background:#fff; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.07); padding:32px 32px 24px 32px; max-width:400px; width:90vw; margin:auto; position:relative;">
+            <button id="closeLoginModal" style="position:absolute; top:10px; right:10px; background:none; border:none; font-size:1.3rem; cursor:pointer; color:#888;">&times;</button>
+            <h2 style="margin-top:0; margin-bottom:24px; font-size:2rem; color:#222; text-align:center;">Login to Bazaar</h2>
+            <form id="loginFormModal" autocomplete="on">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" name="email" required placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" name="password" required placeholder="Enter your password">
+                    <div class="show-password">
+                        <input type="checkbox" id="togglePasswordModal">
+                        <label for="togglePasswordModal">Show Password</label>
+                    </div>
+                </div>
+                <button type="submit" class="login-btn" style="width:100%; padding:12px; background:#007bff; color:#fff; font-size:1.1rem; border:none; border-radius:6px; cursor:pointer; margin-top:8px; transition:background 0.2s;">Login</button>
+            </form>
+            <div class="login-links" style="text-align:center; margin-top:18px;">
+                <a href="#" style="color:#007bff; text-decoration:none; margin:0 8px; font-size:0.98rem;">Forgot Password?</a> |
+                <a href="#" style="color:#007bff; text-decoration:none; margin:0 8px; font-size:0.98rem;">Create Account</a>
+            </div>
+        </div>
+    </div> -->
+    <script>
+// Ensure checkout redirects to order-confirmed.html with order details
+const checkoutForm = document.getElementById('checkoutForm');
+if (checkoutForm) {
+  checkoutForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    // Collect form values (customize as needed)
+    const name = checkoutForm.querySelector('[name="name"]')?.value || '';
+    const address = checkoutForm.querySelector('[name="address"]')?.value || '';
+    const payment = checkoutForm.querySelector('[name="payment"]')?.value || '';
+    // Add more fields as needed
+    // Build URL params
+    const params = new URLSearchParams({
+      name,
+      address,
+      payment
+    });
+    window.location.href = `order-confirmed.php?${params.toString()}`;
+  });
+}
+</script>
+    <!-- <script>
+    // Show/hide password logic for modal
+    document.getElementById('togglePasswordModal').addEventListener('change', function() {
+        const pwd = document.getElementById('loginPassword');
+        pwd.type = this.checked ? 'text' : 'password';
+    });
+    // Close modal
+    document.getElementById('closeLoginModal').onclick = function() {
+        document.getElementById('loginModal').style.display = 'none';
+    };
+    // Placeholder login state
+    let isLoggedIn = false;
+    // Intercept checkout form submit
+    const checkoutForm = document.querySelector('.checkout-form');
+    checkoutForm.addEventListener('submit', function(e) {
+        if (!isLoggedIn) {
+            e.preventDefault();
+            document.getElementById('loginModal').style.display = 'flex';
+        }
+    });
+    // Handle login form submit
+    document.getElementById('loginFormModal').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // TODO: Replace with real authentication logic
+        isLoggedIn = true;
+        document.getElementById('loginModal').style.display = 'none';
+        // Optionally, auto-submit checkout after login
+        checkoutForm.submit();
+    });
+    // Optional: Close modal on outside click
+    document.getElementById('loginModal').addEventListener('click', function(e) {
+        if (e.target === this) this.style.display = 'none';
+    });
+    </script> -->
+</body>
+</html>

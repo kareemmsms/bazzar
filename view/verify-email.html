@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Email | Bazaar</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #fbeedc 0%, #f8e6b5 100%); min-height: 100vh; margin: 0; }
+        .nav { background: #fff; border-bottom: 1px solid #eee; display: flex; align-items: center; padding: 16px 24px; }
+        .nav a { text-decoration: none; color: #333; margin-right: 24px; font-weight: 500; font-size: 1.04rem; }
+        .nav a:last-child { margin-right: 0; }
+        .verify-container { background: #fffefb; border-radius: 18px; box-shadow: 0 4px 24px #cdb89233; padding: 36px 40px 30px 40px; max-width: 420px; width: 100%; margin: 60px auto 0 auto; border: 1px solid #f2e2be; text-align: center; }
+        .verify-container h2 { margin-top: 0; margin-bottom: 20px; font-size: 2.1rem; color: #6a4a1b; font-weight: 700; letter-spacing: 0.5px; }
+        .verify-container p { color: #5b4a2b; font-size: 1.08rem; margin-bottom: 28px; }
+        .verify-container .back-link { margin-top: 20px; }
+        .verify-container .back-link a { color: #007bff; text-decoration: none; font-size: 0.98rem; }
+        .verify-container .back-link a:hover { text-decoration: underline; }
+        @media (max-width: 600px) { .verify-container { padding: 18px 6vw 16px 6vw; max-width: 98vw; } .verify-container h2 { font-size: 1.3rem; } }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <a href="index.html">Back</a>
+    </div>
+    <div class="verify-container">
+        <form action="verify.php"method="GET">
+
+            <h2>Verify Your Email</h2>
+            <p>Thank you for creating an account!<br>
+                We've sent a verification link to your email address.<br>
+                Please check your inbox and click the link to activate your account.</p>
+                <div class="back-link">
+                    <a href="login.html">Back to Login</a>
+                </div>
+      </form>
+    </div>
+</body>
+</html>

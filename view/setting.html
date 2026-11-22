@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings | Bazaar</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        .settings-bg {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #fbeedc 0%, #f8e6b5 100%);
+            padding: 0;
+        }
+        .settings-container {
+            max-width: 520px;
+            margin: 64px auto 0 auto;
+            background: #fffefb;
+            border-radius: 22px;
+            padding: 44px 48px 36px 48px;
+            box-shadow: 0 8px 32px #cdb89244;
+            border: 1.5px solid #f2e2be;
+            animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) 0.1s;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .settings-tabs-wrapper {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 18px;
+            margin-top: 22px;
+            background: #fff7e1;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px #f2e2be33;
+            padding: 14px 12px 10px 12px;
+            align-items: center;
+            width: fit-content;
+        }
+        .settings-tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 0;
+            background: none;
+        }
+        .settings-tabs button {
+            padding: 8px 18px;
+            border: none;
+            border-radius: 4px;
+            background: #ffe7b2;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.04rem;
+            box-shadow: 0 1px 1px #e9c97a22;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.13s;
+            margin: 0 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .settings-tabs button:hover, .settings-tabs button:focus {
+            background: #f2c66d;
+            color: #fff;
+            box-shadow: 0 4px 12px #e9c97a55;
+            transform: translateY(-2px) scale(1.03);
+        }
+        .settings-tabs button.active {
+            background: linear-gradient(90deg, #f2c66d 60%, #e2b04a 100%);
+            color: #fff;
+            box-shadow: 0 4px 18px #e9c97a55;
+            border: 0.5px solid #e2b04a;
+        }
+        .setting-section {
+            margin-top: 32px;
+            padding: 18px 12px 0 2px;
+            min-height: 90px;
+            background: #fffbe7;
+            border-radius: 19px;
+            box-shadow: 0 2px 12px #fbeedc33;
+            border: 1px solid #f2e2be;
+            animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) 0.15s;
+        }
+   
+        .star {
+            font-size: 1.7rem;
+            color: #d3b200;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.13s;
+        }
+        .star.selected {
+            color: #f5c518;
+            transform: scale(1.18);
+        }
+        .settings-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+        /* nav[style] removed in favor of .nav class */
+        @media (max-width: 600px) {
+            .settings-container {
+                padding: 18px 6vw 16px 6vw;
+                max-width: 98vw;
+            }
+            .settings-section {
+                padding: 8px 2vw 8px 2vw;
+            }
+            .settings-tabs button {
+                padding: 8px 10px;
+                font-size: 1rem;
+            }
+            .nav {
+                padding: 12px 8px;
+                font-size: 0.98rem;
+            }
+        }
+        .footer-content {
+            background: #fff9ed;
+            border-top: 1.5px solid #e2cfa2;
+            text-align: center;
+            padding: 22px 0 16px 0;
+            font-size: 1.01rem;
+            color: #b49a6c;
+            letter-spacing: 0.05em;
+            box-shadow: 0 -2px 12px #fbeedc33;
+        }
+    </style>
+</head>
+<body class="settings-bg">
+    <nav class="nav" style="padding: 18px 32px; background: #fff3e0; border-bottom: 1px solid #e8cfa2; box-shadow: 0 2px 8px #e8cfa233;">
+        <a href="index.php"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="cart.php"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="profile.php"><i class="fa-solid fa-user"></i> Profile</a>
+        <a href="setting.html" style="font-weight:bold; color:#b48800;"><i class="fa-solid fa-gear"></i> Settings</a>
+        <a href="confirm-logout.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </nav>
+    <div class="settings-container">
+        <div style="text-align:center;margin-bottom:10px;">
+            <span style="display:inline-block;background:linear-gradient(90deg,#f2c66d,#e2b04a);border-radius:50%;padding:18px 22px;box-shadow:0 6px 20px #f2c66d44;margin-bottom:12px;">
+                <i class="fa-solid fa-gear" style="font-size:2.5rem;color:#fff;"></i>
+            </span>
+        </div>
+        <h2 style="font-weight:800; color:#c19a6b; text-align:center; margin-bottom:22px;letter-spacing:0.5px;">Settings</h2>
+        <div class="settings-tabs-wrapper" style="margin-bottom:30px;box-shadow:none;background:none;padding:0;justify-content:center;">
+            <div class="settings-tabs" style="width:100%;justify-content:center;gap:8px;">
+                <button id="tabNotif" onclick="showTab('notif')" class="active"><i class="fa-solid fa-bell"></i> Notification</button>
+                <button id="tabPerm" onclick="showTab('perm')"><i class="fa-solid fa-user-shield"></i> Permission</button>
+                <button id="tabRate" onclick="showTab('rate')"><i class="fa-solid fa-star"></i> Rate App</button>
+                <button id="tabLegal" onclick="showTab('legal')"><i class="fa-solid fa-scale-balanced"></i> Legal/About</button>
+            </div>
+        </div>
+        <div id="tabContent" class="setting-section card-section" style="margin-top:0;padding:26px 18px 18px 18px;min-height:120px;"></div>
+    </div>
+
+    <style>
+      /* Modern switch style for checkboxes */
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 46px;
+        height: 24px;
+        margin-right: 12px;
+        vertical-align: middle;
+      }
+      .switch input { opacity: 0; width: 0; height: 0; }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: #e2b04a;
+        border-radius: 24px;
+        transition: .3s;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px; width: 18px;
+        left: 3px; bottom: 3px;
+        background: #fff;
+        border-radius: 50%;
+        transition: .3s;
+        box-shadow: 0 2px 6px #cdb89233;
+      }
+      input:checked + .slider {
+        background: #f2c66d;
+      }
+      input:checked + .slider:before {
+        transform: translateX(22px);
+      }
+      .switch-label {
+        font-size: 1.08rem;
+        color: #7c6845;
+        font-weight: 500;
+        margin-bottom: 0;
+        vertical-align: middle;
+      }
+      .setting-section label { display: flex; align-items: center; margin-bottom: 16px; }
+      .setting-section h3 { margin-bottom: 16px; color: #c19a6b; font-weight: 700; }
+      @media (max-width: 600px) {
+        .settings-container { padding: 8vw 1vw 6vw 1vw; }
+        .setting-section { padding: 12px 2vw 10px 2vw !important; }
+      }
+    </style>
+    <script>
+      // Override tab content for Notification and Permission to use switches
+      function showTab(tab) {
+        document.querySelectorAll('.settings-tabs button').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('tabNotif').classList.toggle('active', tab==='notif');
+        document.getElementById('tabPerm').classList.toggle('active', tab==='perm');
+        document.getElementById('tabRate').classList.toggle('active', tab==='rate');
+        document.getElementById('tabLegal').classList.toggle('active', tab==='legal');
+        const content = document.getElementById('tabContent');
+        if(tab==='notif') {
+          content.innerHTML = `<h3><i class='fa-solid fa-bell me-2'></i>Notification Settings</h3>
+            <label><span class='switch'><input type='checkbox' checked><span class='slider'></span></span><span class='switch-label'>Email Notifications</span></label>
+            <label><span class='switch'><input type='checkbox'><span class='slider'></span></span><span class='switch-label'>SMS Notifications</span></label>
+            <label><span class='switch'><input type='checkbox'><span class='slider'></span></span><span class='switch-label'>Push Notifications</span></label>`;
+        } else if(tab==='perm') {
+          content.innerHTML = `<h3><i class='fa-solid fa-user-shield me-2'></i>Permissions</h3>
+            <label><span class='switch'><input type='checkbox' checked><span class='slider'></span></span><span class='switch-label'>Allow Product Management</span></label>
+            <label><span class='switch'><input type='checkbox'><span class='slider'></span></span><span class='switch-label'>Allow Sales Tracking</span></label>
+            <label><span class='switch'><input type='checkbox'><span class='slider'></span></span><span class='switch-label'>Allow Support Contact</span></label>`;
+        } else if(tab==='rate') {
+          content.innerHTML = `<h3><i class='fa-solid fa-star me-2'></i>Rate Our App</h3>
+            <span id='starRating'>
+              <span class='star' onclick='setRating(1)'>&#9733;</span>
+              <span class='star' onclick='setRating(2)'>&#9733;</span>
+              <span class='star' onclick='setRating(3)'>&#9733;</span>
+              <span class='star' onclick='setRating(4)'>&#9733;</span>
+              <span class='star' onclick='setRating(5)'>&#9733;</span>
+            </span>
+            <span id='rateMsg'></span>`;
+        } else if(tab==='legal') {
+          content.innerHTML = `<h3><i class='fa-solid fa-scale-balanced me-2'></i>Legal/About</h3>
+            <p>This is a demo Bazaar E-commerce platform. All rights reserved. &copy; 2025</p>
+            <p><b>About:</b> Bazaar is a modern e-commerce solution for consignors and sellers.</p>`;
+        }
+      }
+      function setRating(r) {
+        document.querySelectorAll('.star').forEach((star, idx) => {
+          star.classList.toggle('selected', idx < r);
+        });
+        document.getElementById('rateMsg').textContent = `Thank you for rating us ${r} star${r>1?'s':''}!`;
+      }
+      // Show default tab
+      showTab('notif');
+    </script>
+
+   
+    <script>
+        function showTab(tab) {
+            document.querySelectorAll('.settings-tabs button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tabNotif').classList.toggle('active', tab==='notif');
+            document.getElementById('tabPerm').classList.toggle('active', tab==='perm');
+            document.getElementById('tabRate').classList.toggle('active', tab==='rate');
+            document.getElementById('tabLegal').classList.toggle('active', tab==='legal');
+            const content = document.getElementById('tabContent');
+            if(tab==='notif') {
+                content.innerHTML = `<h3>Notification Settings</h3>
+                    <label><input type='checkbox' checked> Email Notifications</label><br>
+                    <label><input type='checkbox'> SMS Notifications</label><br>
+                    <label><input type='checkbox'> Push Notifications</label>`;
+            } else if(tab==='perm') {
+                content.innerHTML = `<h3>Permissions</h3>
+                    <label><input type='checkbox' checked> Allow Product Management</label><br>
+                    <label><input type='checkbox'> Allow Sales Tracking</label><br>
+                    <label><input type='checkbox'> Allow Support Contact</label>`;
+            } else if(tab==='rate') {
+                content.innerHTML = `<h3>Rate Our App</h3>
+                    <span id='starRating'>
+                        <span class='star' onclick='setRating(1)'>&#9733;</span>
+                        <span class='star' onclick='setRating(2)'>&#9733;</span>
+                        <span class='star' onclick='setRating(3)'>&#9733;</span>
+                        <span class='star' onclick='setRating(4)'>&#9733;</span>
+                        <span class='star' onclick='setRating(5)'>&#9733;</span>
+                    </span>
+                    <span id='rateMsg'></span>`;
+            } else if(tab==='legal') {
+                content.innerHTML = `<h3>Legal/About</h3>
+                    <p>This is a demo Bazaar E-commerce platform. All rights reserved. &copy; 2025</p>
+                    <p><b>About:</b> Bazaar is a modern e-commerce solution for consignors and sellers.</p>`;
+            }
+        }
+        function setRating(r) {
+            document.querySelectorAll('.star').forEach((star, idx) => {
+                star.classList.toggle('selected', idx < r);
+            });
+            document.getElementById('rateMsg').textContent = `Thank you for rating us ${r} star${r>1?'s':''}!`;
+        }
+        // Show default tab
+        showTab('notif');
+    </script>
+</body>
+</html>

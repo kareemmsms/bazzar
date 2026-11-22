@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Place Order | Bazaar</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #fbeedc 0%, #f8e6b5 100%);
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+            color: #3b2d13;
+        }
+        .order-container {
+            max-width: 480px;
+            margin: 70px auto 0 auto;
+            background: #fffefb;
+            border-radius: 22px;
+            padding: 44px 36px 36px 36px;
+            box-shadow: 0 8px 32px #cdb89244;
+            border: 1.5px solid #f2e2be;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 0.7s cubic-bezier(.23,1.01,.32,1) 0.1s;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(40px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .order-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #c19a6b;
+            margin-bottom: 18px;
+            text-align: center;
+        }
+        .order-details {
+            width: 100%;
+            margin-bottom: 22px;
+        }
+        .order-details label {
+            font-weight: 600;
+            color: #5b4a2b;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .order-details input, .order-details select {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1.5px solid #e2cfa2;
+            background: #fff8e6;
+            font-size: 1.03rem;
+            margin-bottom: 14px;
+            font-family: inherit;
+            box-shadow: 0 2px 8px #fbeedc33;
+            transition: border 0.18s, box-shadow 0.18s;
+        }
+        .order-details input:focus, .order-details select:focus {
+            border: 1.5px solid #c19a6b;
+            outline: none;
+            background: #fffbe7;
+            box-shadow: 0 4px 16px #fbeedc77;
+        }
+        .order-summary {
+            background: #fffbe7;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px #fbeedc33;
+            border: 1px solid #f2e2be;
+            padding: 14px 18px;
+            margin-bottom: 18px;
+            width: 100%;
+        }
+        .order-summary-title {
+            font-weight: 700;
+            color: #c19a6b;
+            margin-bottom: 6px;
+            font-size: 1.13rem;
+        }
+        .order-summary-list {
+            color: #7c6845;
+            font-size: 1.05rem;
+            margin-left: 0;
+            padding-left: 0;
+            list-style: none;
+        }
+        .order-btn {
+            background: linear-gradient(90deg, #f2c66d 60%, #e2b04a 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 28px;
+            font-size: 1.13rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 12px #e9c97a33;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.14s;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 0.04em;
+            margin: 0 auto;
+        }
+        .order-btn:hover, .order-btn:focus {
+            background: linear-gradient(90deg, #e2b04a 60%, #f2c66d 100%);
+            box-shadow: 0 4px 24px #e9c97a55;
+            transform: translateY(-2px) scale(1.01);
+        }
+        .footer-content {
+            background: #fff9ed;
+            border-top: 1.5px solid #e2cfa2;
+            text-align: center;
+            padding: 22px 0 16px 0;
+            font-size: 1.01rem;
+            color: #b49a6c;
+            letter-spacing: 0.05em;
+            box-shadow: 0 -2px 12px #fbeedc33;
+            margin-top: 40px;
+        }
+        @media (max-width: 600px) {
+            .order-container {
+                padding: 18px 6vw 16px 6vw;
+                max-width: 98vw;
+            }
+            .order-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.php"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="cart.php"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+        <a href="profile.php"><i class="fa-solid fa-user"></i> Profile</a>
+        <a href="setting.html"><i class="fa-solid fa-gear"></i> Settings</a>
+        <a href="confirm-logout.html"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+    </nav>
+    <main>
+        <div class="order-container">
+            <div class="order-title"><i class="fa-solid fa-basket-shopping"></i> Place Your Order</div>
+            <form class="order-details" id="orderForm">
+                <label for="deliveryTime"><i class="fa-solid fa-clock"></i> Estimated Delivery Time</label>
+                <input type="text" id="deliveryTime" value="1-2 business days" readonly>
+                <label for="billAmount"><i class="fa-solid fa-file-invoice"></i> Bill Amount</label>
+                <input type="text" id="billAmount" value="$99.99" readonly>
+                <label for="paymentMethod"><i class="fa-solid fa-money-bill-wave"></i> Payment Method</label>
+                <select id="paymentMethod" required>
+                    <option value="cash">Cash on Delivery</option>
+                    <option value="card">Credit/Debit Card</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </form>
+            <div class="order-summary">
+                <div class="order-summary-title"><i class="fa-solid fa-clipboard-list"></i> Order Summary</div>
+                <ul class="order-summary-list">
+                    <li><b>Delivery:</b> 1-2 business days</li>
+                    <li><b>Bill:</b> $99.99</li>
+                    <li><b>Payment:</b> Cash on Delivery</li>
+                </ul>
+            </div>
+            <button class="order-btn" type="submit" form="orderForm"><i class="fa-solid fa-paper-plane"></i> Place Order</button>
+        </div>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <span>&copy; 2025 Bazaar E-commerce. All rights reserved.</span>
+        </div>
+    </footer>
+    
+</body>
+</html>
